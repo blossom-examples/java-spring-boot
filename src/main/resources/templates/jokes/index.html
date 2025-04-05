@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Jokes - Jokes App</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+  <nav class="bg-blue-600 text-white p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <a href="/" class="text-xl font-bold">Jokes App</a>
+      <div class="space-x-4">
+        <a href="/" class="hover:text-blue-200">Home</a>
+        <a href="/jokes" class="hover:text-blue-200">All Jokes</a>
+        <a href="/jokes/new" class="hover:text-blue-200">Add Joke</a>
+        <a href="/jokes/random" class="hover:text-blue-200">Random Joke</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mx-auto p-4">
+    <div class="w-full max-w-4xl mx-auto">
+      <div class="flex justify-between items-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">Jokes Collection</h1>
+        <a href="/jokes/new"
+          class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded transition-colors">Add New
+          Joke</a>
+      </div>
+
+      <div th:if="${not #lists.isEmpty(jokes)}" class="grid gap-6">
+        <div th:each="joke : ${jokes}" class="bg-white rounded-lg shadow-md p-6">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-lg text-gray-800 mb-2" th:text="${joke.content}">Joke content</p>
+              <p class="text-sm text-gray-500" th:text="'By ' + ${joke.author}">By Author</p>
+              <p class="text-xs text-gray-400 mt-1" th:text="'Category: ' + ${joke.category}">Category: general</p>
+            </div>
+            <div class="flex space-x-2">
+              <a th:href="@{/jokes/{id}(id=${joke.id})}" class="text-blue-500 hover:text-blue-700">View</a>
+              <a th:href="@{/jokes/{id}/edit(id=${joke.id})}" class="text-green-500 hover:text-green-700">Edit</a>
+              <a th:href="@{/jokes/{id}/delete(id=${joke.id})}" class="text-red-500 hover:text-red-700"
+                onclick="return confirm('Are you sure you want to delete this joke?')">Delete</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div th:if="${#lists.isEmpty(jokes)}" class="bg-white rounded-lg shadow-md p-6 text-center">
+        <p class="text-gray-600">No jokes yet. Be the first to add one!</p>
+      </div>
+
+      <div class="mt-8 text-center">
+        <a href="/" class="text-blue-500 hover:text-blue-700">Back to Home</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-gray-800 text-white p-4 mt-8">
+    <div class="container mx-auto text-center">
+      <p>Jokes App - Built with Spring Boot</p>
+      <p class="text-sm mt-2">Deploy on <a href="https://blossom-cloud.com" target="_blank"
+          class="text-blue-400 hover:text-blue-300">Blossom</a></p>
+    </div>
+  </footer>
+</body>
+
+</html>

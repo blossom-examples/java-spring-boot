@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${joke != null ? 'Joke Details - Jokes App' : 'Random Joke - Jokes App'}">Joke Details - Jokes App
+  </title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+  <nav class="bg-blue-600 text-white p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <a href="/" class="text-xl font-bold">Jokes App</a>
+      <div class="space-x-4">
+        <a href="/" class="hover:text-blue-200">Home</a>
+        <a href="/jokes" class="hover:text-blue-200">All Jokes</a>
+        <a href="/jokes/new" class="hover:text-blue-200">Add Joke</a>
+        <a href="/jokes/random" class="hover:text-blue-200">Random Joke</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mx-auto p-4">
+    <div class="w-full max-w-4xl mx-auto">
+      <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+        <div class="text-center mb-6">
+          <h1 class="text-3xl font-bold text-gray-800 mb-4" th:text="${joke != null ? 'Joke Details' : 'Random Joke'}">
+            Joke Details</h1>
+          <p class="text-lg text-gray-800 mb-4" th:text="${joke.content}">Joke content</p>
+          <p class="text-sm text-gray-500" th:text="'By ' + ${joke.author}">By Author</p>
+          <p class="text-xs text-gray-400 mt-1" th:text="'Category: ' + ${joke.category}">Category: general</p>
+        </div>
+
+        <div class="flex justify-center space-x-4">
+          <a href="/jokes/random"
+            class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded transition-colors">Get Another
+            Joke</a>
+          <a href="/jokes"
+            class="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded transition-colors">View All
+            Jokes</a>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <a href="/" class="text-blue-500 hover:text-blue-700">Back to Home</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-gray-800 text-white p-4 mt-8">
+    <div class="container mx-auto text-center">
+      <p>Jokes App - Built with Spring Boot</p>
+      <p class="text-sm mt-2">Deploy on <a href="https://blossom-cloud.com" target="_blank"
+          class="text-blue-400 hover:text-blue-300">Blossom</a></p>
+    </div>
+  </footer>
+</body>
+
+</html>

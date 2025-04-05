@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${title} ?: 'Jokes App'">Jokes App</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+  <nav class="bg-blue-600 text-white p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <a href="/" class="text-xl font-bold">Jokes App</a>
+      <div class="space-x-4">
+        <a href="/" class="hover:text-blue-200">Home</a>
+        <a href="/jokes" class="hover:text-blue-200">All Jokes</a>
+        <a href="/jokes/new" class="hover:text-blue-200">Add Joke</a>
+        <a href="/jokes/random" class="hover:text-blue-200">Random Joke</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mx-auto p-4">
+    <div th:replace="${content}">
+      <!-- Content will be replaced here -->
+    </div>
+  </main>
+
+  <footer class="bg-gray-800 text-white p-4 mt-8">
+    <div class="container mx-auto text-center">
+      <p>Jokes App - Built with Spring Boot</p>
+      <p class="text-sm mt-2">Deploy on <a href="https://blossom-cloud.com" target="_blank"
+          class="text-blue-400 hover:text-blue-300">Blossom</a></p>
+    </div>
+  </footer>
+</body>
+
+</html>
