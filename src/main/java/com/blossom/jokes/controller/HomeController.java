@@ -14,7 +14,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model) {
-        jokeService.getRandomJoke().ifPresent(joke -> model.addAttribute("joke", joke));
+        jokeService.getRandomJoke().ifPresent(joke -> model.addAttribute("randomJoke", joke));
         return "home/index";
     }
 }

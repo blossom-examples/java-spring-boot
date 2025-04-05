@@ -14,7 +14,11 @@ public interface JokeRepository extends JpaRepository<Joke, Long> {
     List<Joke> findByCategory(String category);
 
     @Query(value = "SELECT * FROM jokes ORDER BY RANDOM() LIMIT 1", nativeQuery = true)
-    Optional<Joke> findRandomJoke();
+    Joke findRandomJoke();
+
+    List<Joke> findByAuthorContainingIgnoreCase(String author);
+
+    List<Joke> findByContentContainingIgnoreCase(String content);
 
     @Query(value = "SELECT DISTINCT category FROM jokes", nativeQuery = true)
     List<String> findAllCategories();

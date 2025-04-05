@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::section})}">
 
 <head>
   <meta charset="UTF-8">
@@ -21,80 +21,65 @@
     </div>
   </nav>
 
-  <main class="container mx-auto p-4">
-    <div class="w-full max-w-4xl mx-auto text-center">
-      <header class="mb-12">
-        <h1 class="text-4xl font-bold text-gray-800 mb-4">Java Spring Boot Demo</h1>
-        <p class="text-xl text-gray-600 mb-4">A modern web application ready for your next big idea</p>
-        <a href="https://blossom-cloud.com" target="_blank"
-          class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors">
-          <span>Deploy on Blossom</span>
-          <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-          </svg>
-        </a>
-      </header>
+  <section>
+    <div class="bg-white shadow rounded-lg mb-6">
+      <div class="px-4 py-5 sm:p-6">
+        <h1 class="text-3xl font-bold text-gray-900 mb-4">Welcome to Jokes App</h1>
+        <p class="text-gray-600 mb-4">A Spring Boot application for managing and sharing jokes.</p>
+      </div>
+    </div>
 
-      <div class="grid md:grid-cols-2 gap-8 mb-12">
-        <!-- Quick Start Card -->
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <h2 class="text-2xl font-semibold mb-4">Quick Start</h2>
-          <div class="text-left space-y-4">
-            <p class="text-gray-600">Your Spring Boot application includes:</p>
-            <ul class="list-disc list-inside space-y-2 text-gray-600">
-              <li>Modern Tailwind CSS styling</li>
-              <li>Thymeleaf templates</li>
-              <li>PostgreSQL database with Flyway migrations</li>
-              <li>Ready for production deployment</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Resources Card -->
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <h2 class="text-2xl font-semibold mb-4">Next Steps</h2>
-          <div class="text-left space-y-4">
-            <p class="text-gray-600">Helpful resources to get started:</p>
-            <ul class="list-disc list-inside space-y-2 text-gray-600">
-              <li><a href="https://spring.io/guides" target="_blank" class="text-blue-600 hover:text-blue-800">Spring
-                  Guides</a></li>
-              <li><a href="https://tailwindcss.com" target="_blank" class="text-blue-600 hover:text-blue-800">Tailwind
-                  CSS Docs</a></li>
-              <li><a href="https://www.thymeleaf.org/documentation.html" target="_blank"
-                  class="text-blue-600 hover:text-blue-800">Thymeleaf Documentation</a></li>
-              <li><a href="https://flywaydb.org/documentation/" target="_blank"
-                  class="text-blue-600 hover:text-blue-800">Flyway Documentation</a></li>
-            </ul>
-          </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div class="bg-white shadow rounded-lg">
+        <div class="px-4 py-5 sm:p-6">
+          <h2 class="text-xl font-semibold text-gray-900 mb-4">Quick Start</h2>
+          <ul class="space-y-3 text-gray-600">
+            <li>✨ Browse our collection of jokes</li>
+            <li>📝 Add your own jokes</li>
+            <li>🎲 Get a random joke</li>
+            <li>👍 Like your favorite jokes</li>
+            <li>🔍 Search by content or author</li>
+          </ul>
         </div>
       </div>
 
-      <!-- Random Joke Section -->
-      <div class="bg-white rounded-lg shadow-md p-8 mb-8">
-        <h2 class="text-2xl font-semibold mb-6">Random Joke</h2>
-
-        <div th:if="${joke != null}" class="mb-6">
-          <p class="text-lg text-gray-800 mb-4" th:text="${joke.content}">Joke content</p>
-          <p class="text-sm text-gray-500" th:text="'By ' + ${joke.author}">By Author</p>
-          <p class="text-xs text-gray-400 mt-1" th:text="'Category: ' + ${joke.category}">Category: general</p>
-        </div>
-
-        <div th:if="${joke == null}" class="mb-6">
-          <p class="text-gray-600">No jokes available. Be the first to add one!</p>
-        </div>
-
-        <div class="flex justify-center space-x-4">
-          <a href="/jokes/random"
-            class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded transition-colors">Get Another
-            Joke</a>
-          <a href="/jokes"
-            class="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded transition-colors">View All
-            Jokes</a>
+      <div class="bg-white shadow rounded-lg">
+        <div class="px-4 py-5 sm:p-6">
+          <h2 class="text-xl font-semibold text-gray-900 mb-4">Next Steps</h2>
+          <ul class="space-y-3">
+            <li>
+              <a href="/jokes" class="text-indigo-600 hover:text-indigo-500">View all jokes</a>
+            </li>
+            <li>
+              <a href="/jokes/new" class="text-indigo-600 hover:text-indigo-500">Share your joke</a>
+            </li>
+            <li>
+              <a href="/jokes/random" class="text-indigo-600 hover:text-indigo-500">Get a random joke</a>
+            </li>
+            <li>
+              <a href="https://github.com/your-username/jokes-app" class="text-indigo-600 hover:text-indigo-500">View
+                source code</a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-  </main>
+
+    <div class="bg-white shadow rounded-lg" th:if="${randomJoke}">
+      <div class="px-4 py-5 sm:p-6">
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">Random Joke</h2>
+        <blockquote class="text-gray-600 italic mb-4" th:text="${randomJoke.content}">Joke content here</blockquote>
+        <p class="text-sm text-gray-500">
+          By <span th:text="${randomJoke.author}" class="font-medium">Author</span>
+          in <span th:text="${randomJoke.category}" class="font-medium">Category</span>
+        </p>
+        <div class="mt-4">
+          <a th:href="@{/jokes/{id}(id=${randomJoke.id})}" class="text-indigo-600 hover:text-indigo-500">View
+            details</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <footer class="bg-gray-800 text-white p-4 mt-8">
     <div class="container mx-auto text-center">

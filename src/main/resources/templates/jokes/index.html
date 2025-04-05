@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::section})}">
 
 <head>
   <meta charset="UTF-8">
@@ -21,42 +21,53 @@
     </div>
   </nav>
 
-  <main class="container mx-auto p-4">
-    <div class="w-full max-w-4xl mx-auto">
-      <div class="flex justify-between items-center mb-8">
-        <h1 class="text-3xl font-bold text-gray-800">Jokes Collection</h1>
-        <a href="/jokes/new"
-          class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded transition-colors">Add New
-          Joke</a>
+  <section>
+    <div class="bg-white shadow rounded-lg mb-6">
+      <div class="px-4 py-5 sm:p-6">
+        <div class="flex justify-between items-center">
+          <h1 class="text-3xl font-bold text-gray-900">All Jokes</h1>
+          <a href="/jokes/new"
+            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+            Add New Joke
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6">
+      <div th:if="${jokes.empty}" class="bg-white shadow rounded-lg">
+        <div class="px-4 py-5 sm:p-6 text-center">
+          <p class="text-gray-500">No jokes available. Be the first to add one!</p>
+        </div>
       </div>
 
-      <div th:if="${not #lists.isEmpty(jokes)}" class="grid gap-6">
-        <div th:each="joke : ${jokes}" class="bg-white rounded-lg shadow-md p-6">
-          <div class="flex justify-between items-start">
-            <div>
-              <p class="text-lg text-gray-800 mb-2" th:text="${joke.content}">Joke content</p>
-              <p class="text-sm text-gray-500" th:text="'By ' + ${joke.author}">By Author</p>
-              <p class="text-xs text-gray-400 mt-1" th:text="'Category: ' + ${joke.category}">Category: general</p>
-            </div>
-            <div class="flex space-x-2">
-              <a th:href="@{/jokes/{id}(id=${joke.id})}" class="text-blue-500 hover:text-blue-700">View</a>
-              <a th:href="@{/jokes/{id}/edit(id=${joke.id})}" class="text-green-500 hover:text-green-700">Edit</a>
-              <a th:href="@{/jokes/{id}/delete(id=${joke.id})}" class="text-red-500 hover:text-red-700"
-                onclick="return confirm('Are you sure you want to delete this joke?')">Delete</a>
+      <div th:each="joke : ${jokes}" class="bg-white shadow rounded-lg">
+        <div class="px-4 py-5 sm:p-6">
+          <div class="mb-4">
+            <p class="text-lg text-gray-900 mb-2" th:text="${joke.content}">Joke content</p>
+            <p class="text-sm text-gray-500">
+              By <span th:text="${joke.author}" class="font-medium">Author</span>
+              in <span th:text="${joke.category}" class="font-medium">Category</span>
+            </p>
+          </div>
+          <div class="flex items-center space-x-4">
+            <a th:href="@{/jokes/{id}(id=${joke.id})}" class="text-indigo-600 hover:text-indigo-500">View</a>
+            <a th:href="@{/jokes/{id}/edit(id=${joke.id})}" class="text-indigo-600 hover:text-indigo-500">Edit</a>
+            <form th:action="@{/jokes/{id}(id=${joke.id})}" th:method="delete" class="inline">
+              <button type="submit" class="text-red-600 hover:text-red-500">Delete</button>
+            </form>
+            <div class="flex items-center">
+              <form th:action="@{/jokes/{id}/like(id=${joke.id})}" th:method="post" class="inline">
+                <button type="submit" class="text-gray-500 hover:text-gray-700">
+                  <span th:text="${joke.likes}">0</span> 👍
+                </button>
+              </form>
             </div>
           </div>
         </div>
       </div>
-
-      <div th:if="${#lists.isEmpty(jokes)}" class="bg-white rounded-lg shadow-md p-6 text-center">
-        <p class="text-gray-600">No jokes yet. Be the first to add one!</p>
-      </div>
-
-      <div class="mt-8 text-center">
-        <a href="/" class="text-blue-500 hover:text-blue-700">Back to Home</a>
-      </div>
     </div>
-  </main>
+  </section>
 
   <footer class="bg-gray-800 text-white p-4 mt-8">
     <div class="container mx-auto text-center">

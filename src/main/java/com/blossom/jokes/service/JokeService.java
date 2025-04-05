@@ -23,12 +23,12 @@ public class JokeService {
         return jokeRepository.findById(id);
     }
 
-    public Optional<Joke> getRandomJoke() {
-        return jokeRepository.findRandomJoke();
-    }
-
     public List<Joke> getJokesByCategory(String category) {
         return jokeRepository.findByCategory(category);
+    }
+
+    public Optional<Joke> getRandomJoke() {
+        return Optional.ofNullable(jokeRepository.findRandomJoke());
     }
 
     public List<String> getAllCategories() {
@@ -36,23 +36,39 @@ public class JokeService {
     }
 
     @Transactional
-    public Joke createJoke(Joke joke) {
+    public Joke saveJoke(Joke joke) {
         return jokeRepository.save(joke);
-    }
-
-    @Transactional
-    public Optional<Joke> updateJoke(Long id, Joke jokeDetails) {
-        return jokeRepository.findById(id)
-                .map(existingJoke -> {
-                    existingJoke.setContent(jokeDetails.getContent());
-                    existingJoke.setAuthor(jokeDetails.getAuthor());
-                    existingJoke.setCategory(jokeDetails.getCategory());
-                    return jokeRepository.save(existingJoke);
-                });
     }
 
     @Transactional
     public void deleteJoke(Long id) {
         jokeRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Optional<Joke> updateJoke(Long id, Joke jokeDetails) {
+        return jokeRepository.findById(id)
+                .map(joke -> {
+                    joke.setContent(jokeDetails.getContent());
+                    joke.setAuthor(jokeDetails.getAuthor());
+                    joke.setCategory(jokeDetails.getCategory());
+                    return jokeRepository.save(joke);
+                });
+    }
+
+    @Transactional
+    public Optional<Joke> incrementLikes(Long id) {
+        return jokeRepository.findById(id)
+                .map(joke -> {
+                    joke.setLikes(joke.getLikes() + 1);
+                    return jokeRepository.save(joke);
+                });
+    }
+
+    public List<Joke> searchJokes(String query) {
+        List<Joke> byContent = jokeRepository.findByContentContainingIgnoreCase(query);
+        List<Joke> byAuthor = jokeRepository.findByAuthorContainingIgnoreCase(query);
+        byContent.addAll(byAuthor);
+        return byContent.stream().distinct().toList();
     }
 }

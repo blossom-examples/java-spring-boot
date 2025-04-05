@@ -14,27 +14,26 @@ A ready-to-deploy Java Spring Boot application for managing and displaying jokes
 
 ```bash
 # Build the application
-./mvnw clean package
+mvn clean package
 
 # Run the application
-java -jar target/jokes-app-0.0.1-SNAPSHOT.jar
+mvn spring-boot:run
 ```
 
 Visit `http://localhost:8080` in your browser to see the application.
 
 ## Database Configuration
 
-The application uses PostgreSQL by default. You can configure the database connection using environment variables:
+The application uses PostgreSQL by default. You can configure the database connection using the `DATABASE_URL` environment variable:
 
 ```bash
-export SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/jokes_db
-export SPRING_DATASOURCE_USERNAME=your_postgres_user
-export SPRING_DATASOURCE_PASSWORD=your_postgres_password
+# For local development
+export DATABASE_URL=postgres://postgres:postgres@localhost:5432/jokes_dev
+
+# For production on Blossom, this will be automatically set
 ```
 
 Or use an `application.properties` file in the `src/main/resources` directory.
-
-For production deployment on Blossom, the `DATABASE_URL` environment variable will be automatically set.
 
 ## API Endpoints
 
