@@ -2,14 +2,6 @@
 
 A ready-to-deploy Java Spring Boot application for managing and displaying jokes. This app is designed to be deployed on [Blossom](https://blossom-cloud.com).
 
-## Features
-
-- View a list of all jokes
-- Add, edit, and delete jokes
-- Get a random joke
-- Categorize jokes
-- RESTful API endpoints
-
 ## Quick Start
 
 ```bash
@@ -33,7 +25,16 @@ export DATABASE_URL=postgres://postgres:postgres@localhost:5432/jokes_dev
 # For production on Blossom, this will be automatically set
 ```
 
-Or use an `application.properties` file in the `src/main/resources` directory.
+<details>
+<summary>Additional Information</summary>
+
+## Features
+
+- View a list of all jokes
+- Add, edit, and delete jokes
+- Get a random joke
+- Categorize jokes
+- RESTful API endpoints
 
 ## API Endpoints
 
@@ -44,9 +45,4 @@ Or use an `application.properties` file in the `src/main/resources` directory.
 - `PUT /api/jokes/{id}` - Update a joke
 - `DELETE /api/jokes/{id}` - Delete a joke
 
-## Deployment
-
-This application is configured for deployment on Blossom. The Procfile includes:
-
-- Web process: Runs the Spring Boot application
-- Release process: Runs database migrations
+</details>
