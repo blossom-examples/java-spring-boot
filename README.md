@@ -1,5 +1,7 @@
 # Java Spring Boot Jokes App
 
+[![Blossom Badge](https://img.boltops.com/images/blossom/logos/blossom-readme.png)](https://blossom-cloud.com)
+
 A ready-to-deploy Java Spring Boot application for managing and displaying jokes. This app is designed to be deployed on [Blossom](https://blossom-cloud.com).
 
 ## Quick Start
