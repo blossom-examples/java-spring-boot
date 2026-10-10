@@ -31,7 +31,6 @@ parse_db_url() {
 }
 
 echo "Setting up database..."
-echo "DATABASE_URL: $DATABASE_URL"
 
 # Parse the DATABASE_URL
 parse_db_url "$DATABASE_URL"
